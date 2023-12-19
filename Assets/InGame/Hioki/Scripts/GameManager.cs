@@ -1,6 +1,7 @@
 //日本語対応
 using System.Collections;
 using System.Collections.Generic;
+using TMPro.EditorUtilities;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -64,6 +65,15 @@ public class GameManager : MonoBehaviour
         {
             _state = State.Clear;
             _clearUI.SetActive(true);       //UI出す
+        }
+    }
+
+    /// <summary>プレイヤーから呼ぶ</summary>
+    public void GameOver()
+    {
+        if (_state == State.None)
+        {
+            _state = State.Over;
         }
     }
 

@@ -13,7 +13,8 @@ public class Goal : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            AudioManager.Instance.PlaySE(AudioManager.SeSoundData.SE.Goal);
+            AudioManager.instance.PlaySE(AudioManager.SeSoundData.SE.Goal);
+            AudioManager.instance.PlayBGM(AudioManager.BgmSoundData.BGM.Dream);
             _gm.GameClear();
         }
     }
