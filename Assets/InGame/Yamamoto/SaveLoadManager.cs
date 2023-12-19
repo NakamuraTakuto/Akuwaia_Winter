@@ -30,6 +30,8 @@ public class SaveLoadManager : MonoBehaviour
 
     void Save()
     {
+        // •K‚¸‰Šú‰»‚·‚é
+        SaveData saveData = new SaveData();
         // json‚É‘‚«Š·‚¦
         string json = JsonUtility.ToJson(_data);
         Debug.Log(json);
