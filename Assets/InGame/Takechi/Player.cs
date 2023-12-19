@@ -35,6 +35,7 @@ namespace Takechi.InGame
         }
         void LateUpdate()
         {
+            _animator.SetBool("IsGrounded", _isGrounded);
             _animator.SetFloat("HorizontalSpeed", Mathf.Abs(_rb.velocity.x));
         }
         void SetHourglassGravity(bool hourglass = false)
@@ -49,6 +50,7 @@ namespace Takechi.InGame
 
             if (Input.GetButtonDown("Jump") && (_isGrounded || _jumpCount <= _maxJumpCount))
             {
+                _animator.SetTrigger("Jump");
                 //  ˜A‘Å‚µ‚½‚Æ‚«‚É”ò‚Ñ‚·‚¬‚È‚¢‚æ‚¤‚ÉAddForce‘O‚Éy‚Ìvelocity‚ð0‚É‚·‚éB
                 _rb.velocity = new Vector2(_rb.velocity.x, 0);  
                 _rb.AddForce(jumpDirection * _jumpPower, ForceMode2D.Impulse);
