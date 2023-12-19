@@ -5,6 +5,7 @@ using UnityEngine;
 namespace Takechi.InGame
 {
     [RequireComponent(typeof(Rigidbody2D))]
+    [RequireComponent(typeof(Animator))]
     public class Player : MonoBehaviour
     {
         [SerializeField] float _speed = 2f;
@@ -18,9 +19,11 @@ namespace Takechi.InGame
         int _jumpCount = 0;
         /// <summary>ê⁄ínîªíËÉtÉâÉO</summary>
         bool _isGrounded = false;
+        Animator _animator;
         void Start()
         {
             _rb = GetComponent<Rigidbody2D>();
+            _animator = GetComponent<Animator>();
         }
 
         void Update()
@@ -29,6 +32,10 @@ namespace Takechi.InGame
             SetHourglassGravity(Hourglass);
             Jump(Hourglass);
             Walk(Hourglass);
+        }
+        void LateUpdate()
+        {
+            _animator.SetFloat("HorizontalSpeed", Mathf.Abs(_rb.velocity.x));
         }
         void SetHourglassGravity(bool hourglass = false)
         {
@@ -50,8 +57,8 @@ namespace Takechi.InGame
         }
         void Walk(bool hourglass = false)
         {
-            float rightRotation = hourglass ? 0 : 180;
-            float leftRotation = hourglass ? 180 : 0;
+            float rightRotation = hourglass ? 180 : 0;
+            float leftRotation = hourglass ? 0 : 180;
             //  ãÛíÜÇ≈à⁄ìÆÇµÇΩÇ∆Ç´Ç…å∏ë¨ÇÇ©ÇØÇÈ
             if (!_isGrounded && _horizontal != 0)
             {
