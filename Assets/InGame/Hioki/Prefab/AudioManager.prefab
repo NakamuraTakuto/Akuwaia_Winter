@@ -58,6 +58,9 @@ MonoBehaviour:
   - _bgm: 2
     _audioClip: {fileID: 0}
     _volume: 1
+  - _bgm: 3
+    _audioClip: {fileID: 0}
+    _volume: 1
   _seSoundDatas:
   - Se: 0
     AudioClip: {fileID: 0}

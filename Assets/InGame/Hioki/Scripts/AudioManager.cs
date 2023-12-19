@@ -67,6 +67,8 @@ public class AudioManager : MonoBehaviour
             Dream,
             [Tooltip("現実BGM")]
             Real,
+            [Tooltip("スタッフロール")]
+            StaffRolls,
         }
 
         public BGM _bgm;
