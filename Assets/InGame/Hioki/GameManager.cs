@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
     [Header("Debug")]
     [SerializeField, Tooltip("タイム")]
     float _gameTime = 0f;
+    /// <summary>経過時間</summary>
+    public float GameTime => _gameTime;
     [SerializeField, Tooltip("ステート")]
     State _state = State.None;
 
