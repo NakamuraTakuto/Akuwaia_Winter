@@ -48,8 +48,44 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _audioBgm: {fileID: 8084754897081933340}
   _audioSe: {fileID: 3118694768313643613}
-  _bgmSoundDatas: []
-  _seSoundDatas: []
+  _bgmSoundDatas:
+  - _bgm: 0
+    _audioClip: {fileID: 0}
+    _volume: 1
+  - _bgm: 1
+    _audioClip: {fileID: 0}
+    _volume: 1
+  - _bgm: 2
+    _audioClip: {fileID: 0}
+    _volume: 1
+  _seSoundDatas:
+  - Se: 0
+    AudioClip: {fileID: 0}
+    Volume: 1
+  - Se: 1
+    AudioClip: {fileID: 0}
+    Volume: 1
+  - Se: 2
+    AudioClip: {fileID: 0}
+    Volume: 1
+  - Se: 3
+    AudioClip: {fileID: 0}
+    Volume: 1
+  - Se: 4
+    AudioClip: {fileID: 0}
+    Volume: 1
+  - Se: 5
+    AudioClip: {fileID: 0}
+    Volume: 1
+  - Se: 6
+    AudioClip: {fileID: 0}
+    Volume: 1
+  - Se: 7
+    AudioClip: {fileID: 0}
+    Volume: 1
+  - Se: 8
+    AudioClip: {fileID: 0}
+    Volume: 1
   _masterVolume: 1
   _bgmMasterVolume: 1
   _seMasterVolume: 1
