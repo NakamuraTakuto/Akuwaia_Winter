@@ -8,7 +8,7 @@ using UnityEngine.UI;
 namespace Takechi.UI
 {
     [RequireComponent(typeof(CanvasGroup))]
-    public class CreditPanel : MonoBehaviour
+    public class PanelBase : MonoBehaviour
     {
         [SerializeField] Button _openButton;
         [SerializeField] Button _closeButton;

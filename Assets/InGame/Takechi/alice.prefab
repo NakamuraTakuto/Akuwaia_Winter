@@ -1145,6 +1145,7 @@ GameObject:
   - component: {fileID: 497505114034559331}
   - component: {fileID: 288040099082743980}
   - component: {fileID: 1508341720252581656}
+  - component: {fileID: 9202007240541509792}
   m_Layer: 0
   m_Name: alice
   m_TagString: Player
@@ -1292,6 +1293,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.8082159, y: 0.28636456}
   m_EdgeRadius: 0
+--- !u!114 &9202007240541509792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6556024267102284668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e33bf3a87d683f45bcf7f569df127de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gm: {fileID: 0}
 --- !u!1 &7630558864748496983
 GameObject:
   m_ObjectHideFlags: 0
