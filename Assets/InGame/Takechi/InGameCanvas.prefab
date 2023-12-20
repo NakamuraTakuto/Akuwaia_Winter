@@ -1932,8 +1932,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa507ac1806601c42972f159935696a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ranking: {fileID: 0}
-  _stuffedRoll: {fileID: 0}
+  _stuffedRoll: {fileID: 4630799659404184671}
   _titleButton: {fileID: 1938141862567304876}
   _clearTimeText: {fileID: 8861887077761869750}
   _bestTimeText: {fileID: 1512980634770211447}
