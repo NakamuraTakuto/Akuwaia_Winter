@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -7,7 +9,6 @@ public class Yamamoto : MonoBehaviour
 {
     Vector3 _nextPlayerPos;
     Transform _warpPos;
-    [SerializeField] bool _isReal;
 
     // Start is called before the first frame update
     void Start()
@@ -19,23 +20,14 @@ public class Yamamoto : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //Condition condition = (Condition)(_holeDropCount % 2);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            AudioManager.instance.PlaySE(AudioManager.SeSoundData.SE.Hole);
             collision.transform.position = _nextPlayerPos;
-            if (_isReal)
-            {
-                AudioManager.instance.PlayBGM(AudioManager.BgmSoundData.BGM.Dream);
-            }
-            else
-            {
-                AudioManager.instance.PlayBGM(AudioManager.BgmSoundData.BGM.Real);
-            }
         }
     }
 

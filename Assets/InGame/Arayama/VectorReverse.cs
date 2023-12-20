@@ -22,6 +22,7 @@ public class VectorReverse : MonoBehaviour
             var player = collision.GetComponent<Player>();
             if (player)
             {
+                AudioManager.instance.PlaySE(AudioManager.SeSoundData.SE.Hourglass);
                 StartCoroutine(Reverse(player));
                 Debug.Log("çªéûåv");
             }

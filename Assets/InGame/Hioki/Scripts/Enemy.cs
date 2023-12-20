@@ -38,16 +38,6 @@ public class Enemy : MonoBehaviour
             Vector2 moveDir = new Vector2(horizontalInput, 0).normalized;
             _rb.velocity = new Vector2(moveDir.x * _speed, _rb.velocity.y);
             _t = 0f;
-            AudioManager.instance.PlaySE(AudioManager.SeSoundData.SE.Trump);
-        }
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "Player")
-        {
-            GameManager gm = GameObject.Find("GameManager").GetComponent<GameManager>();
-            gm.GameOver();
         }
     }
 }
