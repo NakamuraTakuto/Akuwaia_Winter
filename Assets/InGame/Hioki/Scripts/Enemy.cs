@@ -40,4 +40,13 @@ public class Enemy : MonoBehaviour
             _t = 0f;
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            GameManager gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+            gm.GameOver();
+        }
+    }
 }

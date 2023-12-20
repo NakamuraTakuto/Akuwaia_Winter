@@ -1,7 +1,4 @@
 //日本語対応
-using System.Collections;
-using System.Collections.Generic;
-using TMPro.EditorUtilities;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -21,12 +18,17 @@ public class GameManager : MonoBehaviour
     [SerializeField, Tooltip("ステート")]
     State _state = State.None;
 
+    SaveScore _save;
+    LoadScore _load;
+
     void Start()
     {
         _clearUI.SetActive(false);
         _gameOverUI.SetActive(false);
         _state = State.None;
         _gameTime = 0f;
+        _save = GetComponent<SaveScore>();
+        _load = GetComponent<LoadScore>();
     }
 
     void Update()
@@ -63,6 +65,10 @@ public class GameManager : MonoBehaviour
     {
         if (_state == State.None)
         {
+            string a = _gameTime.ToString("f2");
+            _save.ScoreSave(float.Parse(a));
+            _load.ScoreLoad();
+
             _state = State.Clear;
             _clearUI.SetActive(true);       //UI出す
         }
@@ -84,47 +90,47 @@ public class GameManager : MonoBehaviour
         Over,
     }
 
-    #region　シングルトン
-    public static GameManager instance;
-    public static GameManager Instance
-    {
-        get
-        {
-            if (!instance)
-            {
-                SetupInstance();
-            }
+    /* #region　シングルトン
+     public static GameManager instance;
+     public static GameManager Instance
+     {
+         get
+         {
+             if (!instance)
+             {
+                 SetupInstance();
+             }
 
-            return instance;
-        }
-    }
+             return instance;
+         }
+     }
 
-    void Awake()
-    {
-        if (!instance)
-        {
-            instance = this;
-        }
-        else if (instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
+     void Awake()
+     {
+         if (!instance)
+         {
+             instance = this;
+         }
+         else if (instance != this)
+         {
+             Destroy(gameObject);
+             return;
+         }
 
-        DontDestroyOnLoad(gameObject);
-    }
+         DontDestroyOnLoad(gameObject);
+     }
 
-    static void SetupInstance()
-    {
-        instance = FindObjectOfType<GameManager>();
+     static void SetupInstance()
+     {
+         instance = FindObjectOfType<GameManager>();
 
-        if (!instance)
-        {
-            GameObject go = new GameObject();
-            instance = go.AddComponent<GameManager>();
-            go.name = instance.GetType().Name;
-            DontDestroyOnLoad(go);
-        }
-    }
-    #endregion
+         if (!instance)
+         {
+             GameObject go = new GameObject();
+             instance = go.AddComponent<GameManager>();
+             go.name = instance.GetType().Name;
+             DontDestroyOnLoad(go);
+         }
+     }
+     #endregion*/
 }
