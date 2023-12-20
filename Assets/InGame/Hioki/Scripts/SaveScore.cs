@@ -6,10 +6,11 @@ using NCMB;
 
 public class SaveScore : MonoBehaviour
 {
-    public void ScoreSave(float Score)
+    public void ScoreSave(float Score, string Name)
     {
         NCMBObject scoreClass = new NCMBObject("ScoreClass");
         scoreClass["score"] = Score;
+        scoreClass["name"] = Name;
         scoreClass.SaveAsync((NCMBException e) =>
         {
             if (e != null)

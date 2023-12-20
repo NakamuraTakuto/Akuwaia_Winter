@@ -23,7 +23,7 @@ public class LoadScore : MonoBehaviour
                 for (int i = 0; i < objList.Count; i++)
                 {
                     rank = i + 1;
-                    Debug.Log("ScoreRanking " + rank + "位: " + objList[i]["score"]);
+                    Debug.Log("ScoreRanking " + rank + "位: " + objList[i]["name"] + " " + objList[i]["score"]);
                 }
             }
         });

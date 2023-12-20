@@ -38,6 +38,7 @@ public class Enemy : MonoBehaviour
             Vector2 moveDir = new Vector2(horizontalInput, 0).normalized;
             _rb.velocity = new Vector2(moveDir.x * _speed, _rb.velocity.y);
             _t = 0f;
+            AudioManager.instance.PlaySE(AudioManager.SeSoundData.SE.Trump);
         }
     }
 

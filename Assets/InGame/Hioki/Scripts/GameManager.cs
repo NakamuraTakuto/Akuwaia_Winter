@@ -1,5 +1,6 @@
 //日本語対応
 using UnityEngine;
+using System;
 
 public class GameManager : MonoBehaviour
 {
@@ -56,8 +57,9 @@ public class GameManager : MonoBehaviour
     {
         if (_state == State.None)
         {
-            string a = _gameTime.ToString("f2");
-            _save.ScoreSave(float.Parse(a));
+            //ここがランキング確認するために必要なもの
+            string timeScore = _gameTime.ToString("f2");
+            _save.ScoreSave(float.Parse(timeScore), DateTime.Now.ToString());
             _load.ScoreLoad();
 
             _state = State.Clear;
@@ -72,6 +74,13 @@ public class GameManager : MonoBehaviour
         {
             _state = State.Over;
         }
+    }
+
+    public void Ranking(string name)
+    {
+        string timeScore = _gameTime.ToString("f2");
+        _save.ScoreSave(float.Parse(timeScore), DateTime.Now.ToString());
+        _load.ScoreLoad();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
