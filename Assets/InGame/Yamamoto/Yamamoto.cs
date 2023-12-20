@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -20,10 +18,10 @@ public class Yamamoto : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Condition condition = (Condition)(_holeDropCount % 2);
+        
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
