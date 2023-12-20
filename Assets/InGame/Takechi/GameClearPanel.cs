@@ -9,7 +9,6 @@ namespace Takechi.UI
 {
     public class GameClearPanel : MonoBehaviour
     {
-        [SerializeField] Button _ranking;
         [SerializeField] Button _stuffedRoll;
         [SerializeField] Button _titleButton;
         [SerializeField] Text _clearTimeText;
@@ -26,7 +25,6 @@ namespace Takechi.UI
         }
         void Awake()
         {
-            _ranking.OnClickAsObservable().Subscribe(_ => { }).AddTo(this);
             _stuffedRoll.OnClickAsObservable().Subscribe(_ => SceneManager.LoadSceneAsync(_stuffedRollSceneName)).AddTo(this);
             _titleButton.OnClickAsObservable().Subscribe(_ => SceneManager.LoadSceneAsync(_titleSceneName)).AddTo(this);
             gameObject.SetActive(false);
