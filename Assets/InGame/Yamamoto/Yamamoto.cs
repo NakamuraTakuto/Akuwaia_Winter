@@ -26,6 +26,7 @@ public class Yamamoto : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            AudioManager.instance.PlaySE(AudioManager.SeSoundData.SE.Hole);
             collision.transform.position = _nextPlayerPos;
             if (_isReal)
             {
