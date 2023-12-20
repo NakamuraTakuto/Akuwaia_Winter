@@ -17,9 +17,8 @@ public class GameManager : MonoBehaviour
     public float GameTime => _gameTime;
     [SerializeField, Tooltip("ステート")]
     State _state = State.None;
-    [SerializeField, Tooltip("セーブ")]
+
     SaveScore _save;
-    [SerializeField, Tooltip("ロード")]
     LoadScore _load;
 
     void Start()
@@ -28,6 +27,8 @@ public class GameManager : MonoBehaviour
         _gameOverUI.SetActive(false);
         _state = State.None;
         _gameTime = 0f;
+        _save = GetComponent<SaveScore>();
+        _load = GetComponent<LoadScore>();
     }
 
     void Update()
@@ -59,15 +60,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    SaveLoadManager _s;
-
     /// <summary>ゴールしたら呼ぶ</summary>
     public void GameClear()
     {
-        _s = GetComponent<SaveLoadManager>();
         if (_state == State.None)
         {
-            _save.ScoreSave(_gameTime);
+            string a = _gameTime.ToString("f2");
+            _save.ScoreSave(float.Parse(a));
             _load.ScoreLoad();
 
             _state = State.Clear;
