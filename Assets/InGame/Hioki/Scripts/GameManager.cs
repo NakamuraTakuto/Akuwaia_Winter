@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
             //時間切れ
             if (_gameTime >= _timeLimit)
             {
-                _state = State.Over;
+                GameOver();
             }
         }
         //ゲームオーバー
@@ -62,6 +62,7 @@ public class GameManager : MonoBehaviour
             _save.ScoreSave(float.Parse(timeScore), DateTime.Now.ToString());
             _load.ScoreLoad();
 
+            AudioManager.instance.PlaySE(AudioManager.SeSoundData.SE.Clear);
             _state = State.Clear;
             _clearUI.SetActive(true);       //UI出す
         }
@@ -72,6 +73,7 @@ public class GameManager : MonoBehaviour
     {
         if (_state == State.None)
         {
+            AudioManager.instance.PlaySE(AudioManager.SeSoundData.SE.GameOver);
             _state = State.Over;
         }
     }
@@ -88,7 +90,7 @@ public class GameManager : MonoBehaviour
         //仮の落下
         if (collision.gameObject.tag == "Player" && _state == State.None)
         {
-            _state = State.Over;
+            GameOver();
         }
     }
 
