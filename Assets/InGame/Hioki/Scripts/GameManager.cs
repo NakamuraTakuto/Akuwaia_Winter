@@ -46,8 +46,6 @@ public class GameManager : MonoBehaviour
         //ゲームオーバー
         else if (_state == State.Over)
         {
-            _s = GetComponent<SaveLoadManager>();
-            _s.LoadAction();
             _gameOverUI.SetActive(true);    //UI出す
         }
     }
@@ -69,9 +67,6 @@ public class GameManager : MonoBehaviour
         _s = GetComponent<SaveLoadManager>();
         if (_state == State.None)
         {
-            //_s.SaveAction();
-            //_s.LoadAction();
-
             _save.ScoreSave(_gameTime);
             _load.ScoreLoad();
 
