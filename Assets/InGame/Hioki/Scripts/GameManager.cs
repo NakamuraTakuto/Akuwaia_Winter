@@ -51,15 +51,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        //仮の落下
-        if (collision.gameObject.tag == "Player" && _state == State.None)
-        {
-            _state = State.Over;
-        }
-    }
-
     /// <summary>ゴールしたら呼ぶ</summary>
     public void GameClear()
     {
@@ -78,6 +69,15 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         if (_state == State.None)
+        {
+            _state = State.Over;
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        //仮の落下
+        if (collision.gameObject.tag == "Player" && _state == State.None)
         {
             _state = State.Over;
         }
