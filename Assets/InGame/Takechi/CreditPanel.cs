@@ -1,18 +1,24 @@
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using UniRx;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Takechi.UI
 {
     [RequireComponent(typeof(CanvasGroup))]
     public class CreditPanel : MonoBehaviour
     {
+        [SerializeField] Button _openButton;
+        [SerializeField] Button _closeButton;
         CanvasGroup _canvasGroup;
         void Start()
         {
             _canvasGroup = GetComponent<CanvasGroup>();
             InactivePanel();
+            _openButton.OnClickAsObservable().Subscribe(_ =>TweenActivePanel()).AddTo(this);
+            _closeButton.OnClickAsObservable().Subscribe(_ => TweenInactivePanel()).AddTo(this);
         }
         void ActivePanel()
         {
@@ -26,13 +32,13 @@ namespace Takechi.UI
             _canvasGroup.interactable = false;
             _canvasGroup.blocksRaycasts = false;
         }
-        public void TweenActivePanel()
+        void TweenActivePanel()
         {
             transform.localScale = Vector3.zero;
             ActivePanel();
             transform.DOScale(Vector3.one, 0.5f).SetEase(Ease.Linear).SetLink(gameObject);
         }
-        public void TweenInactivePanel()
+        void TweenInactivePanel()
         {
             transform.DOScale(Vector3.zero, 0.5f).SetEase(Ease.Linear).OnComplete(() => 
             {
