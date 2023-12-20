@@ -7,6 +7,7 @@ public class Yamamoto : MonoBehaviour
 {
     Vector3 _nextPlayerPos;
     Transform _warpPos;
+    [SerializeField] bool _isReal;
 
     // Start is called before the first frame update
     void Start()
@@ -26,6 +27,14 @@ public class Yamamoto : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             collision.transform.position = _nextPlayerPos;
+            if (_isReal)
+            {
+                AudioManager.instance.PlayBGM(AudioManager.BgmSoundData.BGM.Dream);
+            }
+            else
+            {
+                AudioManager.instance.PlayBGM(AudioManager.BgmSoundData.BGM.Real);
+            }
         }
     }
 
