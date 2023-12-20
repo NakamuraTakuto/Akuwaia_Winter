@@ -35,7 +35,6 @@ public class Mirror : MonoBehaviour
 
     void Update()
     {
-
         if (_isMove)
         {
             // 全てのオブジェクトが移動し終えたとき
@@ -49,8 +48,12 @@ public class Mirror : MonoBehaviour
     // 衝突した場合
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (_isMove == false)
-            MoveObject();
+        if (_isMove) return;
+
+        if (collision.CompareTag("Player")) 
+        { 
+                MoveObject();
+        }
     }
 
 
