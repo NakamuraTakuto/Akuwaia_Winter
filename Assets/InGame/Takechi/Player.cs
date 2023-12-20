@@ -1,17 +1,25 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using UniRx;
 using UnityEngine;
 
 namespace Takechi.InGame
 {
     [RequireComponent(typeof(Rigidbody2D))]
-    [RequireComponent(typeof(Animator))]
     public class Player : MonoBehaviour
     {
         [SerializeField] float _speed = 2f;
         [SerializeField] float _jumpPower = 10f;
-        [SerializeField,Header("空中でジャンプできる回数")] int _maxJumpCount = 1;
-        public bool Hourglass = false;
+        [SerializeField, Header("空中でジャンプできる回数")] int _maxJumpCount = 1;
+        [SerializeField, Header("キャラクターを表示するためのオブジェクト")] Transform _body;
+        [SerializeField, Header("キャラクターのアニメーター")] Animator _animator;
+        BoolReactiveProperty _hourglass = new(false);
+        public bool Hourglass
+        {
+            get { return _hourglass.Value; }
+            set { _hourglass.Value = value; }
+        }
         Rigidbody2D _rb;
         /// <summary>減速をかけるための変数</summary>
         float _deceleration = 1;
@@ -19,29 +27,29 @@ namespace Takechi.InGame
         int _jumpCount = 0;
         /// <summary>接地判定フラグ</summary>
         bool _isGrounded = false;
-        Animator _animator;
         void Start()
         {
             _rb = GetComponent<Rigidbody2D>();
-            _animator = GetComponent<Animator>();
+            //  _hourglassのValueが変化した際に実行するメソッドを登録
+            _hourglass.Subscribe(SetHourglassGravity).AddTo(this);
         }
 
         void Update()
         {
             _horizontal = Input.GetAxis("Horizontal");
-            SetHourglassGravity(Hourglass);
-            Jump(Hourglass);
-            Walk(Hourglass);
+            Jump(_hourglass.Value);
+            Walk(_hourglass.Value);
         }
         void LateUpdate()
         {
+            _animator.SetBool("IsGrounded", _isGrounded);
             _animator.SetFloat("HorizontalSpeed", Mathf.Abs(_rb.velocity.x));
         }
         void SetHourglassGravity(bool hourglass = false)
         {
             _rb.gravityScale = hourglass ? -1 : 1;  //  重力の向き
-            var euler = transform.rotation.eulerAngles;
-            transform.rotation = Quaternion.Euler(euler.x, euler.y, hourglass ? 180 : 0);   //  体の上下の向き
+            //transform.rotation = Quaternion.Euler(euler.x, euler.y, hourglass ? 180 : 0);   //  体の上下の向き
+            transform.DORotate(new Vector3(0, 0, hourglass ? 180 : 0), 1).SetEase(Ease.InQuart).SetLink(gameObject);
         }
         void Jump(bool hourglass = false)
         {
@@ -49,6 +57,7 @@ namespace Takechi.InGame
 
             if (Input.GetButtonDown("Jump") && (_isGrounded || _jumpCount <= _maxJumpCount))
             {
+                _animator.SetTrigger("Jump");
                 //  連打したときに飛びすぎないようにAddForce前にyのvelocityを0にする。
                 _rb.velocity = new Vector2(_rb.velocity.x, 0);  
                 _rb.AddForce(jumpDirection * _jumpPower, ForceMode2D.Impulse);
@@ -64,17 +73,13 @@ namespace Takechi.InGame
             {
                 if (_deceleration > 0) _deceleration -= Time.deltaTime * 0.3f;
             }
+
             //  rotationのyで移動方向への方向転換
             if (_horizontal > 0)    //  右
-            {
-                var euler = transform.rotation.eulerAngles;
-                transform.rotation = Quaternion.Euler(euler.x, rightRotation, euler.z);
-            }
+                _body.transform.localRotation = Quaternion.Euler(0, rightRotation, 0);
             else if (_horizontal < 0)   //  左
-            {
-                var euler = transform.rotation.eulerAngles;
-                transform.rotation = Quaternion.Euler(euler.x, leftRotation, euler.z);
-            }
+                _body.transform.localRotation = Quaternion.Euler(0, leftRotation, 0);
+
             _rb.velocity = new Vector2(_horizontal * _speed * _deceleration, _rb.velocity.y);
         }
         void OnTriggerStay2D(Collider2D collision)
