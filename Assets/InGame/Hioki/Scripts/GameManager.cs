@@ -58,9 +58,9 @@ public class GameManager : MonoBehaviour
         if (_state == State.None)
         {
             //ここがランキング確認するために必要なもの
-            string timeScore = _gameTime.ToString("f2");
-            _save.ScoreSave(float.Parse(timeScore), DateTime.Now.ToString());
-            _load.ScoreLoad();
+           // string timeScore = _gameTime.ToString("f2");
+           //// _save.ScoreSave(float.Parse(timeScore), DateTime.Now.ToString());
+           // _load.ScoreLoad();
 
             _state = State.Clear;
             _clearUI.SetActive(true);       //UI出す

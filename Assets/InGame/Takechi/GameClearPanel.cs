@@ -15,6 +15,8 @@ namespace Takechi.UI
         [SerializeField] Text _bestTimeText;
         [SerializeField, Header("タイトルシーンの名前")] string _titleSceneName = "Title";
         [SerializeField, Header("スタッフロールシーンの名前")] string _stuffedRollSceneName = "Staffroll";
+        [SerializeField] GameManager _gm;
+        IntReactiveProperty _clearTimeRP = new();
         public float ClearTime
         {
             set { _clearTimeText.text = Takechi.Utility.Time.ToTime(value); }
@@ -25,9 +27,14 @@ namespace Takechi.UI
         }
         void Awake()
         {
-            _stuffedRoll.OnClickAsObservable().Subscribe(_ => SceneManager.LoadSceneAsync(_stuffedRollSceneName)).AddTo(this);
-            _titleButton.OnClickAsObservable().Subscribe(_ => SceneManager.LoadSceneAsync(_titleSceneName)).AddTo(this);
+            _clearTimeRP.Subscribe(f => _clearTimeText.text = Takechi.Utility.Time.ToTime(f)).AddTo(this);
+            _stuffedRoll.OnClickAsObservable().Subscribe( _=> SceneManager.LoadSceneAsync(_stuffedRollSceneName)).AddTo(this);
+            _titleButton.OnClickAsObservable().Subscribe( _=> SceneManager.LoadSceneAsync(_titleSceneName)).AddTo(this);
             gameObject.SetActive(false);
+        }
+        private void Update()
+        {
+            _clearTimeRP.Value = (int)_gm.GameTime;
         }
     }
 }

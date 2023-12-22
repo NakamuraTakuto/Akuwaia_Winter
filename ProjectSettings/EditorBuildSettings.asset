@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/InGame/Scenes/SampleScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/InGame/Takechi/Title.unity
+    guid: 9024a7c581a36a74c8bcb832e9950b45
+  - enabled: 1
+    path: Assets/InGame/Nakamura/Scenes/Main.unity
+    guid: 1767138fecdf06a45950c7a1ec3116eb
+  - enabled: 1
+    path: Assets/InGame/Arayama/Staffroll.unity
+    guid: fd2cc64bf8e7ed949b9434e7a560671f
   m_configObjects: {}
