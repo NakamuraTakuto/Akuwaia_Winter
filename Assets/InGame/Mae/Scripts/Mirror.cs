@@ -51,8 +51,9 @@ public class Mirror : MonoBehaviour
         if (_isMove) return;
 
         if (collision.CompareTag("Player")) 
-        { 
-                MoveObject();
+        {
+            AudioManager.Instance.PlaySE(AudioManager.SeSoundData.SE.Mirror);
+            MoveObject();
         }
     }
 

@@ -15,7 +15,7 @@ public class UIManager : MonoBehaviour
     {
         for (int i = 0; i < _timeGo.Count; i++)
         {
-            _timeGo[i].text = _gm.GameTime.ToString("f1");
+            _timeGo[i].text = _gm.GameTime.ToString("f2");
         }
     }
 }
