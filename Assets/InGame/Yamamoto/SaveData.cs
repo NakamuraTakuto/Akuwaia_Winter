@@ -10,10 +10,11 @@ public class SaveData : MonoBehaviour
     [SerializeField] string _name;
     [SerializeField] float _time;
     [SerializeField] Text _text;
+    [SerializeField] GameManager _gameManager;
 
     public void Save()
     {
-        float a = GameManager.instance.GameTime;
+        float a = _gameManager.GameTime;
         _time = _time > a ? a : _time;
     }
 

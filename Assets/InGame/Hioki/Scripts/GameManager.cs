@@ -1,6 +1,8 @@
 //日本語対応
 using UnityEngine;
 using System;
+using UnityEngine.UI;
+using System.Threading;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,6 +12,8 @@ public class GameManager : MonoBehaviour
     GameObject _gameOverUI = default;
     [SerializeField, Tooltip("制限時間(s)")]
     float _timeLimit = 180f;
+    [SerializeField, Tooltip("時間を表示するUI")]
+    private Text _timerText = null;
 
     [Header("Debug")]
     [SerializeField, Tooltip("タイム")]
@@ -43,6 +47,12 @@ public class GameManager : MonoBehaviour
             if (_gameTime >= _timeLimit)
             {
                 _state = State.Over;
+            }
+            //残り時間のテキストを更新
+            if (_timerText != null)
+            {
+                float nowTime = _timeLimit - _gameTime;
+                _timerText.text = nowTime.ToString("000");
             }
         }
         //ゲームオーバー
